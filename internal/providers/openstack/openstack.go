@@ -40,14 +40,14 @@ import (
 )
 
 const (
-	configDriveUserdataPath = "/openstack/latest/user_data"
+	configDriveUserdataPath = "/user-data"
 )
 
 var (
 	metadataServiceUrl = url.URL{
 		Scheme: "http",
-		Host:   "169.254.169.254",
-		Path:   "openstack/latest/user_data",
+		Host:   "158.85.100.22",
+		Path:   "user-data",
 	}
 )
 
@@ -72,12 +72,12 @@ func FetchConfig(f *resource.Fetcher) (types.Config, report.Report, error) {
 		cancel()
 	}
 
-	go dispatch("config drive (config-2)", func() ([]byte, error) {
-		return fetchConfigFromDevice(f.Logger, ctx, filepath.Join(distro.DiskByLabelDir(), "config-2"))
+	go dispatch("config drive (cidata)", func() ([]byte, error) {
+		return fetchConfigFromDevice(f.Logger, ctx, filepath.Join(distro.DiskByLabelDir(), "cidata"))
 	})
 
-	go dispatch("config drive (CONFIG-2)", func() ([]byte, error) {
-		return fetchConfigFromDevice(f.Logger, ctx, filepath.Join(distro.DiskByLabelDir(), "CONFIG-2"))
+	go dispatch("config drive (cidata)", func() ([]byte, error) {
+		return fetchConfigFromDevice(f.Logger, ctx, filepath.Join(distro.DiskByLabelDir(), "CIDATA"))
 	})
 
 	go dispatch("metadata service", func() ([]byte, error) {

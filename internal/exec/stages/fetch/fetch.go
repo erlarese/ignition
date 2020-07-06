@@ -59,6 +59,7 @@ func (stage) Name() string {
 
 func (s stage) Run(_ types.Config) error {
 	// Nothing - all we do is fetch and allow anything else in the initramfs to run
+	s.Logger.Info("erlarese - added message, changed with new paths")
 	s.Logger.Info("fetch complete")
 	return nil
 }
